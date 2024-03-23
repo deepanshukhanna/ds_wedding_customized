@@ -289,12 +289,16 @@ async function fetchAndDisplayImages() {
     const sasToken = 'sp=r&st=2024-03-23T16:00:23Z&se=2025-04-01T00:00:23Z&spr=https&sv=2022-11-02&sr=c&sig=m9O0K3%2Bc8%2FJSbb5Y0VQz48a1FODxNpZU3gGNAh6wqVI%3D'; // Replace this with your SAS token
 
     const urlWithSasToken = `${containerUrl}?${sasToken}`;
-    const headers = {
-        Authorization: `SharedKeyLite ${containerUrl}:${sasToken}`
-    };
 
     try {
-        const response = await fetch(containerUrl, { headers });
+        const response = await fetch(urlWithSasToken, {
+            method: 'GET',
+            headers: {
+                'x-ms-version': '2020-10-02',
+                'x-ms-date': new Date().toUTCString()
+            }
+        });
+
         if (!response.ok) {
             throw new Error(`Failed to fetch images: ${response.status} ${response.statusText}`);
             console.log(response.statusText)
