@@ -291,10 +291,7 @@ async function fetchAndDisplayImages() {
     const urlWithSasToken = `${containerUrl}?${sasToken}`;
 
     try {
-        const headers = {
-            Authorization: `Bearer ${sasToken}`
-        };
-        const response = await fetch(containerUrl, { headers });
+        const response = await fetch(containerUrl);
         if (!response.ok) {
             throw new Error(`Failed to fetch images: ${response.status} ${response.statusText}`);
         }
