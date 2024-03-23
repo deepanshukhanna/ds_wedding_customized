@@ -96,7 +96,7 @@ namespace ImageResizeWebApp.Helpers
             {
                 foreach (BlobItem blobItem in container.GetBlobs())
                 {
-                    imageUrls.Add(container.Uri + "/" + blobItem.Name?_storageConfig.ImageSasToken);
+                    imageUrls.Add(container.Uri + "/" + blobItem.Name+ "?" +_storageConfig.ImageSasToken);
                 }
             }
 
