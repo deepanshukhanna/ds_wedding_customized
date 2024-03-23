@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.25.2/css/blueimp-gallery.min.css" crossorigin="anonymous">
 
+<title>Sonali & Deepanshu's Wedding</title>
 <style>
     html {
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -44,10 +45,150 @@
         display: block;
         margin-top 1.5rem;
     }
-</style>
 
+    body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #1d1d1d, #333333);
+            color: #b8860b; /* Darker shade of gold */
+    }
+
+    header {
+        background: linear-gradient(45deg, #1c1c1c, #333333);
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #b8860b; /* Darker shade of gold */
+    }
+
+    .logo img {
+        max-width: 200px; /* Increased logo size */
+    }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul li {
+        display: inline;
+        margin-right: 20px;
+    }
+
+    nav ul li a {
+        color: #b8860b; /* Darker shade of gold */
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+        color: #ffd700; /* Lighter shade of gold */
+    }
+
+    main {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .hero {
+        margin-top: 50px;
+        text-align: center;
+        background-color: rgba(184, 134, 11, 0.5); /* Semi-transparent gold */
+        padding: 50px 20px;
+        border-radius: 10px;
+    }
+
+    .hero h1 {
+        font-size: 4em;
+        color: #b8860b; /* Darker shade of gold */
+        margin-bottom: 20px;
+    }
+
+    .hero p {
+        font-size: 1.5em;
+        color: #ffd700; /* Lighter shade of gold */
+    }
+
+    .image-upload {
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .image-upload h2 {
+        font-size: 2em;
+        color: #b8860b; /* Darker shade of gold */
+        margin-bottom: 20px;
+    }
+
+    .upload-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .upload-form input[type="file"] {
+        display: none;
+    }
+
+    .upload-form label {
+        background-color: #b8860b; /* Darker shade of gold */
+        color: black;
+        padding: 15px 30px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin: 0 15px 15px 0;
+        font-size: 1.2em;
+    }
+
+    .upload-form label:hover {
+        background-color: #ffd700; /* Lighter shade of gold */
+        color: black;
+    }
+
+    footer {
+        text-align: center;
+        background: linear-gradient(45deg, #1c1c1c, #333333);
+        color: #b8860b; /* Darker shade of gold */
+        padding: 20px;
+        border-top: 2px solid #b8860b; /* Darker shade of gold */
+    }
+</style>
+<header>
+    <div class="logo">
+        <img src="your-logo.png" alt="Sonali & Deepanshu's Wedding Logo">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">RSVP</a></li>
+        </ul>
+    </nav>
+</header>
 
 <main>
+
+    <section class="hero">
+        <h1>Welcome to Our Wedding</h1>
+        <p>Join us as we celebrate love and unity</p>
+    </section>
+
+    <section class="image-upload">
+        <h2>Share Your Moments</h2>
+        <div class="upload-form">
+            <input type="file" name="image" id="image" accept="image/*">
+            <label for="image">Choose File</label>
+            <button type="submit">Upload</button>
+        </div>
+    </section>
+
     <div class="box header">
         <h1><span class="fa fa-user-circle-o"></span> <span id="page-title">ImageResizer</span></h1>
     </div>
@@ -93,6 +234,9 @@
     </div>
 </main>
 
+<footer>
+    <p>&copy; 2024 Sonali & Deepanshu's Wedding</p>
+</footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.25.2/js/blueimp-gallery.min.js"></script>
