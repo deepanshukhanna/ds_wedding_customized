@@ -197,8 +197,6 @@
         <div class="image-container" id="imageContainer">
             <!-- Images will be dynamically added here -->
         </div>
-        <h1>List Blobs from Azure Blob Storage Container</h1>
-        <ul id="blobList"></ul>
     </div>
 </main>
 
@@ -286,20 +284,13 @@
 
 // Function to fetch images from Azure container and display them
 async function fetchAndDisplayImages() {
-    const containerName = 'images';
     const containerUrl = 'https://dkhannaweddingcontentsa.blob.core.windows.net/images'; // Replace this with your Azure container URL
     const sasToken = 'sp=r&st=2024-03-23T18:23:36Z&se=2025-03-31T02:23:36Z&spr=https&sv=2022-11-02&sr=c&sig=qlKMQ0ykXf1hXN2h3nE54gFhvg8%2FZb7crgQQdDKtKts%3D'; // Replace this with your SAS token
 
     const containerUrlWithSas = `${containerUrl}?${sasToken}`;
 
-    // Create a new BlobServiceClient using the container URL with SAS token
-    const blobServiceClient = new Azure.StorageBlob.BlobServiceClient(containerUrlWithSas);
-    
-    // Get a reference to the container
-    const containerClient = blobServiceClient.getContainerClient(containerName);
-
     try {
-        const response = await fetch(urlWithSasToken, {
+        const response = await fetch(containerUrlWithSas, {
             method: 'GET',
             headers: {
                 'x-ms-version': '2023-11-03',
