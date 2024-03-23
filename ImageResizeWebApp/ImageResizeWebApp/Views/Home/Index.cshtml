@@ -282,7 +282,7 @@
         }
     };
 
-    async function fetchAndDisplayImages() {
+    function fetchAndDisplayImages() {
         const containerUrl = 'https://dkhannaweddingcontentsa.blob.core.windows.net/images?sp=r&st=2024-03-23T15:43:34Z&se=2025-03-30T23:43:34Z&spr=https&sv=2022-11-02&sr=c&sig=Ozev4z%2FQ1sww%2B6zHJVyn6aLXxyzFY7QuWx0HSvfe8%2FU%3D'; // Replace this with your Azure container URL
         const response = await fetch(containerUrl);
         const data = await response.json();
@@ -299,6 +299,12 @@
         });
     }
 
-    // Call the function to fetch and display images when the page loads
-    window.onload = fetchAndDisplayImages;
+    // Start first interval
+    fetchAndDisplayImages()
+    
+    setInterval(function() {
+        fetchAndDisplayImages()
+    }, 5000)
+
+
 </script>
