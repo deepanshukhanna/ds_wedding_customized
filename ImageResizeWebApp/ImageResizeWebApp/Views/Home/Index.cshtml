@@ -14,6 +14,17 @@
 <title>Sonali & Deepanshu's Wedding</title>
 <style>
 
+    .image-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 10px;
+    }
+    
+    .image-item {
+        width: 100%;
+        height: auto;
+    }
+
     .logo {
         display: flex;
         justify-content: center;
@@ -182,6 +193,10 @@
                 </div>
             </form>
         </div>
+
+        <div class="image-container" id="imageContainer">
+            <!-- Images will be dynamically added here -->
+        </div>
     </div>
 </main>
 
@@ -266,4 +281,24 @@
             });                    
         }
     };
+
+    async function fetchAndDisplayImages() {
+        const containerUrl = 'YOUR_AZURE_CONTAINER_URL'; // Replace this with your Azure container URL
+        const response = await fetch(containerUrl);
+        const data = await response.json();
+
+        const imageContainer = document.getElementById('imageContainer');
+
+        // Loop through each image in the container and create an <img> element
+        data.forEach(image => {
+            const imgElement = document.createElement('img');
+            imgElement.src = `${containerUrl}/${image}`;
+            imgElement.alt = image;
+            imgElement.classList.add('image-item');
+            imageContainer.appendChild(imgElement);
+        });
+    }
+
+    // Call the function to fetch and display images when the page loads
+    window.onload = fetchAndDisplayImages;
 </script>
