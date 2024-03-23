@@ -209,7 +209,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
 <script>
-    // init gallery for later use
+/*    
+// init gallery for later use
     var gallery;
 
     // Grab links for images from backend api
@@ -281,7 +282,7 @@
             });                    
         }
     };
-
+*/
 // Function to fetch images from Azure container and display them
 async function fetchAndDisplayImages() {
     const containerUrl = 'https://dkhannaweddingcontentsa.blob.core.windows.net/images'; // Replace this with your Azure container URL
@@ -290,7 +291,10 @@ async function fetchAndDisplayImages() {
     const urlWithSasToken = `${containerUrl}?${sasToken}`;
 
     try {
-        const response = await fetch(urlWithSasToken);
+        const headers = {
+            Authorization: `Bearer ${sasToken}`
+        };
+        const response = await fetch(containerUrl, { headers });
         if (!response.ok) {
             throw new Error(`Failed to fetch images: ${response.status} ${response.statusText}`);
         }
