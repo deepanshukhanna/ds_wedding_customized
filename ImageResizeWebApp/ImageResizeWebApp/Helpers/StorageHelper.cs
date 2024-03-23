@@ -73,5 +73,26 @@ namespace ImageResizeWebApp.Helpers
 
             return await Task.FromResult(thumbnailUrls);
         }
+
+        public static async Task<List<string>> GetImageUrls(AzureStorageConfig _storageConfig)
+        {
+            List<string> imagelUrls = new List<string>();
+        
+            // Create BlobServiceClient using connection string
+            BlobServiceClient blobServiceClient = new BlobServiceClient(_storageConfig.ConnectionString);
+        
+            // Get reference to the container
+            BlobContainerClient container = blobServiceClient.GetBlobContainerClient(_storageConfig.ImageContainer);
+        
+            if (await container.ExistsAsync())
+            {
+                await foreach (BlobItem blobItem in container.GetBlobsAsync())
+                {
+                    imagelUrls.Add(container.Uri + "/" + blobItem.Name);
+                }
+            }
+        
+            return imagelUrls;
+        }
     }
 }
