@@ -291,7 +291,7 @@ async function fetchAndDisplayImages() {
     const urlWithSasToken = `${containerUrl}?${sasToken}`;
 
     try {
-        const response = await fetch(containerUrl);
+        const response = await fetch(urlWithSasToken);
         if (!response.ok) {
             throw new Error(`Failed to fetch images: ${response.status} ${response.statusText}`);
         }
