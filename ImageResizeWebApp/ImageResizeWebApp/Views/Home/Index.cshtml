@@ -211,12 +211,12 @@
 
 <script>   
 // init gallery for later use
-/*    var gallery;
+    var gallery;
 
     // Grab links for images from backend api
     function fetchImageLinks() {
         // Fetch images
-        $.get("api/images/thumbnails", function(fetchedImageLinks) {
+        $.get("api/images/list", function(fetchedImageLinks) {
             console.log(fetchedImageLinks)
 
             // Check if anything is in there
@@ -267,7 +267,7 @@
     setInterval(function() {
         fetchImageLinks()
     }, 5000) 
-*/
+
     /* Dropzone */
     // "imageUpload" is the camelized version of the HTML element's ID
     Dropzone.options.imageUpload = {

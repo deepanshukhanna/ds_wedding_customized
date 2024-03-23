@@ -73,5 +73,34 @@ namespace ImageResizeWebApp.Helpers
 
             return await Task.FromResult(thumbnailUrls);
         }
+
+        public static async Task<bool> GetImageUrls(AzureStorageConfig _storageConfig)
+        {
+             List<string> imageUrls = new List<string>();
+
+            // Create a URI to the blob
+            Uri containerUri = new Uri("https://" +
+                                  _storageConfig.AccountName +
+                                  ".blob.core.windows.net/" +
+                                  _storageConfig.ImageContainer);
+
+            // Create StorageSharedKeyCredentials object by reading
+            // the values from the configuration (appsettings.json)
+            StorageSharedKeyCredential storageCredentials =
+                new StorageSharedKeyCredential(_storageConfig.AccountName, _storageConfig.AccountKey);
+
+            // Create the blob client.
+            BlobContainerClient container = new BlobContainerClient(containerUri, storageCredentials);
+
+            if (container.Exists())
+            {
+                foreach (BlobItem blobItem in container.GetBlobs())
+                {
+                    thumbnailUrls.Add(container.Uri + "/" + blobItem.Name);
+                }
+            }
+
+            return await Task.FromResult(thumbnailUrls);
+        }
     }
 }
