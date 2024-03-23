@@ -1,4 +1,4 @@
-﻿namespace ImageResizeWebApp.Models
+namespace ImageResizeWebApp.Models
 {
     public class AzureStorageConfig
     {
@@ -6,6 +6,5 @@
         public string AccountKey { get; set; }
         public string ImageContainer { get; set; }
         public string ThumbnailContainer { get; set; }
-        public string ConnectionString { get; set; }
     }
 }
