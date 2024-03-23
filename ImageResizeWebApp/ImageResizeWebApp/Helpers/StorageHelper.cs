@@ -84,9 +84,9 @@ namespace ImageResizeWebApp.Helpers
             // Get reference to the container
             BlobContainerClient container = blobServiceClient.GetBlobContainerClient(_storageConfig.ImageContainer);
         
-            if (await container.Exists())
+            if (container.Exists())
             {
-                await foreach (BlobItem blobItem in container.GetBlobs())
+                foreach (BlobItem blobItem in container.GetBlobs())
                 {
                     imagelUrls.Add(container.Uri + "/" + blobItem.Name);
                 }
