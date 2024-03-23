@@ -291,10 +291,10 @@ async function fetchAndDisplayImages() {
     const containerUrlWithSas = `${containerUrl}?${sasToken}`;
 
     try {
-        const response = await fetch(containerUrl, {
+        const response = await fetch(containerUrlWithSas, {
             method: 'GET',
             headers: {
-                'Authorization': `SharedKey ${storageAccountName}:${sasToken}`,
+                'Authorization': `SharedKey ${storageAccountName}:ktuJj5Qpn5s24bgwCm9zFLWMqPuGKBrSx0Wm+XEXC2jUdihRWr526QhCnsooro388EgV6zXl6qgZ+AStUL+8Nw==`,
                 'x-ms-version': '2023-11-03',
                 'x-ms-date': new Date().toUTCString()
             }
