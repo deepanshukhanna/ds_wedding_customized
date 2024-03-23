@@ -209,7 +209,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.25.2/js/blueimp-gallery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-<script src="azure-storage-blob.js"></script>
 
 <script>   
 // init gallery for later use
@@ -285,42 +284,11 @@
         }
     };
 
-const containerName = 'images';
-const containerUrl = 'https://dkhannaweddingcontentsa.blob.core.windows.net/images'; // Replace this with your Azure container URL
-const sasToken = 'sp=r&st=2024-03-23T16:00:23Z&se=2025-04-01T00:00:23Z&spr=https&sv=2022-11-02&sr=c&sig=m9O0K3%2Bc8%2FJSbb5Y0VQz48a1FODxNpZU3gGNAh6wqVI%3D'; // Replace this with your SAS token
-
-const containerUrlWithSas = `${containerUrl}?${sasToken}`;
-
-// Create a new BlobServiceClient using the container URL with SAS token
-const blobServiceClient = new Azure.StorageBlob.BlobServiceClient(containerUrlWithSas);
-
-// Get a reference to the container
-const containerClient = blobServiceClient.getContainerClient(containerName);
-
-
-// List all blobs within the container
-async function listBlobs() {
-    const blobList = document.getElementById('blobList');
-
-    // List blobs
-    let iter = containerClient.listBlobsFlat();
-    let blobItem = await iter.next();
-    while (!blobItem.done) {
-        const li = document.createElement('li');
-        li.textContent = blobItem.value.name;
-        blobList.appendChild(li);
-        blobItem = await iter.next();
-    }
-}
-
-// Call the function to list blobs
-listBlobs();
-
 // Function to fetch images from Azure container and display them
 async function fetchAndDisplayImages() {
     const containerName = 'images';
     const containerUrl = 'https://dkhannaweddingcontentsa.blob.core.windows.net/images'; // Replace this with your Azure container URL
-    const sasToken = 'sp=r&st=2024-03-23T16:00:23Z&se=2025-04-01T00:00:23Z&spr=https&sv=2022-11-02&sr=c&sig=m9O0K3%2Bc8%2FJSbb5Y0VQz48a1FODxNpZU3gGNAh6wqVI%3D'; // Replace this with your SAS token
+    const sasToken = 'sp=r&st=2024-03-23T18:23:36Z&se=2025-03-31T02:23:36Z&spr=https&sv=2022-11-02&sr=c&sig=qlKMQ0ykXf1hXN2h3nE54gFhvg8%2FZb7crgQQdDKtKts%3D'; // Replace this with your SAS token
 
     const containerUrlWithSas = `${containerUrl}?${sasToken}`;
 
@@ -334,7 +302,7 @@ async function fetchAndDisplayImages() {
         const response = await fetch(urlWithSasToken, {
             method: 'GET',
             headers: {
-                'x-ms-version': '2020-10-02',
+                'x-ms-version': '2023-11-03',
                 'x-ms-date': new Date().toUTCString()
             }
         });
