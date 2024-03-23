@@ -92,5 +92,26 @@ namespace ImageResizeWebApp.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        // GET /api/images/images
+        [HttpGet("images")]
+        public async Task<IActionResult> GetImages()
+        {
+            try
+            {
+                if (storageConfig.AccountKey == string.Empty || storageConfig.AccountName == string.Empty)
+                    return BadRequest("Sorry, can't retrieve your Azure storage details from appsettings.js, make sure that you add Azure storage details there.");
+
+                if (storageConfig.ImageContainer == string.Empty)
+                    return BadRequest("Please provide a name for your image container in Azure blob storage.");
+
+                List<string> imageUrls = await StorageHelper.GetImageUrls(storageConfig);
+                return new ObjectResult(imageUrls);            
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
