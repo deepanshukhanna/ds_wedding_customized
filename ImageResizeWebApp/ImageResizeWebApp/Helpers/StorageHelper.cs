@@ -74,7 +74,7 @@ namespace ImageResizeWebApp.Helpers
             return await Task.FromResult(thumbnailUrls);
         }
 
-        public static async Task<bool> GetImageUrls(AzureStorageConfig _storageConfig)
+        public static async Task<List<string>> GetImageUrls(AzureStorageConfig _storageConfig)
         {
              List<string> imageUrls = new List<string>();
 
@@ -96,11 +96,11 @@ namespace ImageResizeWebApp.Helpers
             {
                 foreach (BlobItem blobItem in container.GetBlobs())
                 {
-                    thumbnailUrls.Add(container.Uri + "/" + blobItem.Name);
+                    imageUrls.Add(container.Uri + "/" + blobItem.Name);
                 }
             }
 
-            return await Task.FromResult(thumbnailUrls);
+            return await Task.FromResult(imageUrls);
         }
     }
 }
