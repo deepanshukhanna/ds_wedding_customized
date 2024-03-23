@@ -161,7 +161,17 @@
 </style>
 <header>
     <div class="logo">
-        <img src="your-logo.png" alt="Sonali & Deepanshu's Wedding Logo">
+        <div id="stored-images"></div>
+    
+        <!-- The Gallery as inline carousel, can be positioned anywhere on the page -->
+        <div id="blueimp-gallery-carousel" class="blueimp-gallery blueimp-gallery-carousel">
+            <div class="slides"></div>
+            <h3 class="title"></h3>
+            <a class="prev">‹</a>
+            <a class="next">›</a>
+            <a class="play-pause"></a>
+            <ol class="indicator"></ol>
+        </div>
     </div>
     <nav>
         <ul>
@@ -176,22 +186,27 @@
 <main>
 
     <section class="hero">
-        <h1>Welcome to Our Wedding</h1>
+        <h1>Welcome to Sonali and Deepanshu's Wedding</h1>
         <p>Join us as we celebrate love and unity</p>
     </section>
 
     <section class="image-upload">
         <h2>Share Your Moments</h2>
-        <div class="upload-form">
-            <input type="file" name="image" id="image" accept="image/*">
-            <label for="image">Choose File</label>
-            <button type="submit">Upload</button>
+        <div>
+            <form action="/api/images/upload"
+                 class="dropzone needsclick dz-clickable" 
+                 id="image-upload"
+                 method="post"
+                 enctype="multipart/form">
+
+                <div class="dz-message needsclick">
+                    <span class="note needsclick">
+                        Drop files here or click to upload.
+                    </span>
+                </div>
+            </form>
         </div>
     </section>
-
-    <div class="box header">
-        <h1><span class="fa fa-user-circle-o"></span> <span id="page-title">ImageResizer</span></h1>
-    </div>
     
     <div class="box content">
         <hr>
@@ -223,13 +238,6 @@
                 <a class="play-pause"></a>
                 <ol class="indicator"></ol>
             </div>
-        </div>
-    </div>
-    <div class="box footer">
-        <hr>
-        <div class="privacy">
-            <p>This app has no official privacy policy. Your data will be uploaded to a service in order produce a picture.
-                Your images will be public once you upload them and there is no automated way to remove them.</p>
         </div>
     </div>
 </main>
