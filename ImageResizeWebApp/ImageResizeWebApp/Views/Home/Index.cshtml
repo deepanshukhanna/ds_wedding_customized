@@ -284,8 +284,8 @@
 
 // Function to fetch images from Azure container and display them
 async function fetchAndDisplayImages() {
-    const containerUrl = 'YOUR_AZURE_CONTAINER_URL'; // Replace this with your Azure container URL
-    const sasToken = 'YOUR_SAS_TOKEN'; // Replace this with your SAS token
+    const containerUrl = 'https://dkhannaweddingcontentsa.blob.core.windows.net/images'; // Replace this with your Azure container URL
+    const sasToken = 'sp=r&st=2024-03-23T16:00:23Z&se=2025-04-01T00:00:23Z&spr=https&sv=2022-11-02&sr=c&sig=m9O0K3%2Bc8%2FJSbb5Y0VQz48a1FODxNpZU3gGNAh6wqVI%3D'; // Replace this with your SAS token
 
     const urlWithSasToken = `${containerUrl}?${sasToken}`;
 
