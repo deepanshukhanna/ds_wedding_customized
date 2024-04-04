@@ -21,7 +21,10 @@ namespace ImageResizeWebApp
             services.AddOptions();
             services.Configure<AzureStorageConfig>(Configuration.GetSection("AzureStorageConfig"));
             services.AddMvc();
-
+            services.Configure<FormOptions>(options =>
+                {
+                    options.MultipartBodyLengthLimit = long.MaxValue; // Or set it to the maximum limit you desire
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
