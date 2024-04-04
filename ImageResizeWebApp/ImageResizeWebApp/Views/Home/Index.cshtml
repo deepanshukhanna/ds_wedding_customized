@@ -290,7 +290,7 @@
             console.log('Images array are not equal');
     
             // Update ImageLinks with new image urls. Only compare actual URL without SAS token query string
-            var newImageLinks = _.difference(fetchedImageLinks.map(s => s.split("?")[0]), ImageLinks.map(s => s.split("?")[0]));
+            var newImageLinks = _.difference(fetchedImageLinks, ImageLinks);
     
             console.log('Difference is: ');
             console.log(newImageLinks);
