@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "UniteWithDS";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -258,63 +258,59 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>   
-// init gallery for later use
-    var gallery;
+    // init gallery for later use
+    var ImageLinks;
 
     // Grab links for images from backend api
     function fetchImageLinks() {
         // Fetch images
         $.get("api/images/list", function(fetchedImageLinks) {
-            console.log(fetchedImageLinks)
-
-            // Check if anything is in there
-            if ( _.isEmpty(fetchedImageLinks) ){
-                console.log('empty fetched')
-                // do nothing  
-            } else {
-                // Check if we have a gallery initialized
-                /*if ( _.isEmpty(gallery) ) {
-                    // initialize gallery
-                    gallery = blueimp.Gallery(
-                                fetchedImageLinks, // gallery links array
-                                {
-                                    container: '#blueimp-gallery-carousel',
-                                    carousel: true
-                                } // gallery options
-                            );                    
-                } else {
-                    // check if images are equal to array
-                    console.log('currently in gallery:')
-                    console.log(gallery.list)
-                    var imageLinksEqual = _.isEqual(_.sortBy(gallery.list.map(s => s.split("?")[0])), _.sortBy(fetchedImageLinks.map(s => s.split("?")[0])))
-                    if ( imageLinksEqual ) {
-                        console.log('images arr are equal')
-                        // do nothing
-                    } else {
-                        console.log('images arr are not equal')
-
-                        // update gallery with new image urls. Only compare actual url without SAS token query string
-                        var newImageLinks = _.difference(fetchedImageLinks.map(s => s.split("?")[0]), gallery.list.map(s => s.split("?")[0]))
-
-                        console.log('differene is: ')
-                        console.log(newImageLinks)
-                        // Only add new images
-                        gallery.add(newImageLinks);
-
-                        // Force image load
-                        gallery.next();
-                    }
-                }*/
-                var galleryContainer = document.getElementById("galleryContainer");
-        
-                fetchedImageLinks.forEach(function(imageLink) {
-                    var galleryItem = document.createElement("div");
-                    galleryItem.className = "gallery-item";
-                    galleryItem.innerHTML = '<img src="' + imageLink + '" alt="Gallery Image">';
-        
-                    galleryContainer.appendChild(galleryItem);
-                });
-            }     
+            console.log(fetchedImageLinks);
+            
+            // Check if anything is fetched
+            if (_.isEmpty(fetchedImageLinks)) {
+                console.log('Empty fetched');
+                return; // Exit function early if no images fetched
+            }
+            ImageLinks = fetchedImageLinks;
+            // Check if ImageLinks is defined and is an array
+            if (!Array.isArray(ImageLinks)) {
+                console.log('ImageLinks is not defined or not an array');
+                ImageLinks = []; // Initialize ImageLinks if it's not defined or not an array
+            }
+    
+            // Check if images are equal
+            var imageLinksEqual = _.isEqual(_.sortBy(ImageLinks.map(s => s.split("?")[0])), _.sortBy(fetchedImageLinks.map(s => s.split("?")[0])));
+    
+            if (imageLinksEqual) {
+                console.log('Images array are equal');
+                return; // Exit function if arrays are equal
+            }
+    
+            console.log('Images array are not equal');
+    
+            // Update ImageLinks with new image urls. Only compare actual URL without SAS token query string
+            var newImageLinks = _.difference(fetchedImageLinks.map(s => s.split("?")[0]), ImageLinks.map(s => s.split("?")[0]));
+    
+            console.log('Difference is: ');
+            console.log(newImageLinks);
+    
+            // Add new images to ImageLinks
+            ImageLinks.push(...newImageLinks);
+    
+            // Load images
+            loadImages(newImageLinks);
+        });
+    }
+    
+    function loadImages(imageLinks) {
+        var galleryContainer = document.getElementById("galleryContainer");
+    
+        imageLinks.forEach(function(imageLink) {
+            var galleryItem = document.createElement("div");
+            galleryItem.className = "gallery-item";
+            galleryItem.innerHTML = '<img src="' + imageLink + '" alt="Gallery Image">';
+            galleryContainer.appendChild(galleryItem);
         });
     }
 
