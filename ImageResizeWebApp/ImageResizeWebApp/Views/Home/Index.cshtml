@@ -170,6 +170,43 @@
         border-top: 2px solid #b8860b; /* Darker shade of gold */
     }
 
+    .gallery-container {
+        max-height: 80vh; /* Limit the height of the gallery for scrolling */
+        overflow-y: auto; /* Enable vertical scrolling */
+        padding: 20px;
+        background-color: #f5f5f5;
+    }
+
+    .gallery-item {
+        width: 300px;
+        margin-bottom: 20px; /* Add space between items */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+
+    @media screen and (max-width: 768px) {
+        .gallery-item {
+            width: 250px;
+        }
+    }
+
+    @media screen and (max-width: 480px) {
+        .gallery-item {
+            width: 200px;
+        }
+    }
+
 </style>
 </head>
  <header>
@@ -207,7 +244,7 @@
 
             <div id="stored-images"></div>
 
-            <!-- The Gallery as inline carousel, can be positioned anywhere on the page -->
+            <!-- The Gallery as inline carousel, can be positioned anywhere on the page 
             <div id="blueimp-gallery-carousel" class="blueimp-gallery blueimp-gallery-carousel">
                 <div class="slides"></div>
                 <h3 class="title"></h3>
@@ -215,6 +252,10 @@
                 <a class="next">›</a>
                 <a class="play-pause"></a>
                 <ol class="indicator"></ol>
+            </div> -->
+
+            <div class="gallery-container" id="galleryContainer">
+                <!-- Gallery items will be added dynamically here -->
             </div>
     </div>
 </main>
@@ -226,6 +267,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.25.2/js/blueimp-gallery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>   
 // init gallery for later use
@@ -243,7 +285,7 @@
                 // do nothing  
             } else {
                 // Check if we have a gallery initialized
-                if ( _.isEmpty(gallery) ) {
+                /*if ( _.isEmpty(gallery) ) {
                     // initialize gallery
                     gallery = blueimp.Gallery(
                                 fetchedImageLinks, // gallery links array
@@ -274,7 +316,16 @@
                         // Force image load
                         gallery.next();
                     }
-                }       
+                }*/
+                var galleryContainer = document.getElementById("galleryContainer");
+        
+                fetchedImageLinks.forEach(function(imageLink) {
+                    var galleryItem = document.createElement("div");
+                    galleryItem.className = "gallery-item";
+                    galleryItem.innerHTML = '<img src="' + imageLink + '" alt="Gallery Image">';
+        
+                    galleryContainer.appendChild(galleryItem);
+                });
             }     
         });
     }
