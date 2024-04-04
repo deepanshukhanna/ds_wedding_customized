@@ -26,6 +26,18 @@ namespace ImageResizeWebApp.Helpers
             return formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
         }
 
+        public static bool IsVideo(IFormFile file)
+        {
+            if (file.ContentType.Contains("video"))
+            {
+                return true;
+            }
+
+            string[] formats = new string[] { ".mp4", ".avi", ".mov", ".mkv" };
+
+            return formats.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
+        }
+
         public static async Task<bool> UploadFileToStorage(Stream fileStream, string fileName,
                                                             AzureStorageConfig _storageConfig)
         {
